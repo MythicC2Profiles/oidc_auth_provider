@@ -4,10 +4,10 @@ OIDC is an authentication container that provides support for OpenID Connect (OI
 
 To configure it, you need to edit the `config.json` file and set the following values:
 
-`issuer` - The base URL of the OpenID Connect provider (identity provider).
-`client_id` The unique identifier assigned to your Mythic application by the OIDC provider.
-`client_secret` - A secret key issued alongside the `client_id`.
-`redirect_url` - The callback URL where the OIDC provider will send the user after authentication. Must be `<MYTHIC-URL>/auth_acs/OIDC/OIDC`.
+`issuer` - The base URL of the OpenID Connect provider (identity provider).  
+`client_id` The unique identifier assigned to your Mythic application by the OIDC provider.  
+`client_secret` - A secret key issued alongside the `client_id`.  
+`redirect_url` - The callback URL where the OIDC provider will send the user after authentication. Must be `<MYTHIC-URL>/auth_acs/OIDC/OIDC`.  
 
 ## How to install an agent in this format within Mythic
 
