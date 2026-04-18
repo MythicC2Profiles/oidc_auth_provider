@@ -17,7 +17,7 @@ import (
 )
 
 const version = "1.0.0"
-const name = "OIDC"
+const name = "oidc"
 
 const cookieStateName = "oidc_state"
 
