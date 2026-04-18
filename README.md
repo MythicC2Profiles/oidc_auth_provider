@@ -1,24 +1,41 @@
-# OIDC
+# oidc_auth_provider
 
-OIDC is an authentication container that provides support for OpenID Connect (OIDC) authentication to Mythic.
+oidc_auth_provider is an authentication container that provides support for OpenID Connect (OIDC) authentication to Mythic.
 
-To configure it, you need to edit the `config.json` file and set the following values:
+## Installation
 
-`issuer` - The base URL of the OpenID Connect provider (identity provider).  
-`client_id` The unique identifier assigned to your Mythic application by the OIDC provider.  
+```
+sudo ./mythic-cli install github https://github.com/MythicC2Profiles/oidc_auth_provider
+```
+
+## Configuration
+
+After installing the provider, navigate to Installed Services → AUTH tab, then click the paperclip icon:
+
+![](.assets/step-1.png)
+
+Edit `config.json` file:
+
+![](.assets/step-2.png)
+
+Example configuration:
+
+```json
+{
+    "issuer": "https://oidc.example.com",
+    "client_id": "<client-id>",
+    "client_secret": "<client-secret>",
+    "redirect_url": "https://<mythic-domain>:7443/auth_acs/oidc/oidc"
+}
+```
+
+`issuer` - The base URL of the OpenID Connect provider.  
+`client_id` - The unique identifier assigned to your Mythic application by the OIDC provider.  
 `client_secret` - A secret key issued alongside the `client_id`.  
-`redirect_url` - The callback URL where the OIDC provider will send the user after authentication. Must be `<MYTHIC-URL>/auth_acs/OIDC/OIDC`.  
+`redirect_url` - The callback URL where the OIDC provider will send the user after authentication. Must be `https://<mythic-domain>:7443/auth_acs/oidc/oidc`.  
 
-## How to install an agent in this format within Mythic
+Once the configuration is saved, users can log in to Mythic via the configured OIDC provider.
 
-When it's time for you to test out your install or for another user to install your agent, it's pretty simple. Within Mythic you can run the `mythic-cli` binary to install this in one of three ways:
+> **Note:** The user must already exist in Mythic, and their Mythic email address must match the one registered with the OIDC provider.
 
-* `sudo ./mythic-cli install github https://github.com/user/repo` to install the main branch
-* `sudo ./mythic-cli install github https://github.com/user/repo branchname` to install a specific branch of that repo
-* `sudo ./mythic-cli install folder /path/to/local/folder/cloned/from/github` to install from an already cloned down version of an agent repo
-
-Now, you might be wondering _when_ should you or a user do this to properly add your agent to their Mythic instance. There's no wrong answer here, just depends on your preference. The three options are:
-
-* Mythic is already up and going, then you can run the install script and just direct that agent's containers to start (i.e. `sudo ./mythic-cli start agentName` and if that agent has its own special C2 containers, you'll need to start them too via `sudo ./mythic-cli start c2profileName`).
-* Mythic is already up and going, but you want to minimize your steps, you can just install the agent and run `sudo ./mythic-cli start`. That script will first _stop_ all of your containers, then start everything back up again. This will also bring in the new agent you just installed.
-* Mythic isn't running, you can install the script and just run `sudo ./mythic-cli start`.
+![](.assets/step-3.png)
